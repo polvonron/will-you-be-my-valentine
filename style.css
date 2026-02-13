@@ -1,0 +1,150 @@
+:root {
+    --primary: #ff8fa3;
+    --secondary: #ff4d6d;
+    --bg: #fff0f3;
+    --dark: #590d22;
+    --glass: rgba(255, 255, 255, 0.8);
+    --safe-area-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+* { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg);
+    color: var(--dark);
+    height: 100vh;
+    overflow: hidden;
+    transition: background-color 1s ease;
+}
+
+body.sleeping-mode {
+    background-color: #0b1026; /* Dark Blue */
+    color: #a4b0be;
+}
+
+.hidden { display: none !important; }
+
+/* --- Intro Screen --- */
+#intro-screen {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    z-index: 1000;
+    background: var(--bg);
+    text-align: center;
+    padding: 20px;
+}
+
+h1 { font-family: 'Fredoka One', cursive; color: var(--secondary); margin-bottom: 10px; }
+h2 { color: var(--secondary); font-size: 1.5rem; }
+
+.intro-buttons { margin-top: 30px; display: flex; gap: 20px; align-items: center; }
+.intro-buttons button {
+    padding: 15px 30px; font-size: 1.2rem; border: none;
+    border-radius: 50px; cursor: pointer; font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+#btn-yes { background: var(--secondary); color: white; }
+#btn-no { background: #ccc; color: #666; position: relative; }
+
+/* --- Setup Screen --- */
+#setup-screen {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    background: rgba(0,0,0,0.5); z-index: 2000;
+}
+.modal-content {
+    background: white; padding: 30px; border-radius: 20px; width: 85%; text-align: center;
+}
+.modal-actions { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+.modal-actions button { padding: 10px 20px; border-radius: 10px; border: none; background: var(--secondary); color: white; cursor: pointer; }
+
+/* --- Game Screen --- */
+#game-screen { height: 100%; display: flex; flex-direction: column; }
+
+header {
+    padding: 15px; text-align: center;
+    background: var(--glass); backdrop-filter: blur(5px); z-index: 10;
+}
+#clock-display { font-size: 1.5rem; font-weight: bold; font-family: 'Fredoka One'; }
+#medal-container { font-size: 1.2rem; margin-top: 5px; min-height: 20px;}
+
+.sprite-container {
+    flex: 1; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; position: relative;
+}
+
+#main-sprite {
+    width: 250px; height: 250px;
+    background-image: url('https://raw.githubusercontent.com/polvonron/will-you-be-my-valentine/3f890a32b8f4d376e838222c6a6b360077fbdd95/1000126021-removebg-preview.png');
+    background-size: 300% 200%;
+    background-repeat: no-repeat;
+    background-position: 0% 0%; 
+    animation: breathe 3s infinite ease-in-out;
+    cursor: pointer; transition: transform 0.1s;
+}
+
+#main-sprite:active { transform: scale(0.95); }
+
+/* Sprite States */
+.sprite-normal { background-position: 0% 0% !important; }
+.sprite-happy { background-position: 50% 0% !important; }
+.sprite-sad { background-position: 100% 0% !important; }
+.sprite-tired { background-position: 0% 100% !important; }
+.sprite-sick { background-position: 50% 100% !important; }
+.sprite-bored { background-position: 100% 100% !important; }
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#sprite-action-area { margin-top: 20px; text-align: center; height: 50px; }
+#btn-tuck-in { background: #4a69bd; color: white; border: none; padding: 10px 20px; border-radius: 20px; }
+
+/* Bottom Panel */
+.bottom-panel {
+    height: 45vh; background: white;
+    border-top-left-radius: 30px; border-top-right-radius: 30px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+    display: flex; flex-direction: column;
+    padding-bottom: var(--safe-area-bottom);
+}
+.tab-headers { display: flex; padding: 10px 20px; border-bottom: 1px solid #eee; }
+.tab-btn {
+    flex: 1; background: none; border: none; padding: 10px;
+    font-weight: bold; color: #999; border-bottom: 3px solid transparent;
+}
+.tab-btn.active { color: var(--secondary); border-bottom-color: var(--secondary); }
+.tab-content { flex: 1; overflow-y: auto; padding: 20px; padding-bottom: 80px; display: none; }
+.tab-content.active { display: block; }
+
+/* Status Tab */
+.stats-row { display: flex; gap: 10px; margin-bottom: 20px; }
+.stat-box { flex: 1; background: #f8f9fa; padding: 10px; border-radius: 10px; text-align: center; }
+.progress-bar { height: 8px; background: #eee; border-radius: 4px; margin-top: 5px; overflow: hidden; }
+#xp-bar { height: 100%; background: var(--secondary); transition: width 0.3s; }
+
+.love-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
+.love-btn { flex: 1; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 15px; font-weight: bold; }
+
+/* Schedule */
+.class-item { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee; }
+.class-item.active { background: #ffebf0; color: var(--secondary); font-weight: bold; border-radius: 8px; border: 1px solid var(--secondary); }
+
+/* Shop */
+.shop-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; margin-bottom: 10px; border-radius: 12px; }
+.shop-info h4 { margin: 0; font-size: 1rem; }
+.shop-info p { margin: 2px 0 0; font-size: 0.8rem; color: #666; }
+.buy-btn { background: white; border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+.buy-btn:disabled { opacity: 0.5; border-color: #ccc; color: #ccc; }
+
+.floating-text {
+    position: absolute; color: var(--secondary); font-weight: bold; font-size: 1.5rem;
+    pointer-events: none; animation: floatUp 1s forwards;
+}
+@keyframes floatUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-50px); } }
