@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Hanah</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="https://raw.githubusercontent.com/polvonron/will-you-be-my-valentine/deada9c8f3142a96f00f479ed681ede78ccd79c3/lv_0_20260213224937.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="intro-screen">
+        <h1 id="greeting-text">Good Morning!</h1>
+        <p>I have a very important question...</p>
+        <h2>Will you be my Valentine?</h2>
+        <div class="intro-buttons">
+            <button id="btn-yes" onclick="acceptValentine()">Yes! 💖</button>
+            <button id="btn-no" onmouseover="teleportButton()" ontouchstart="teleportButton()">No 😢</button>
+        </div>
+    </div>
+
+    <div id="setup-screen" class="hidden">
+        <div class="modal-content">
+            <h2>One-time Setup ⚙️</h2>
+            <p>To help me predict your schedule:</p>
+            <p><strong>Is it your turn to wash dishes today?</strong></p>
+            <div class="modal-actions">
+                <button onclick="finishSetup(true)">Yes</button>
+                <button onclick="finishSetup(false)">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="hidden">
+        
+        <header>
+            <div id="calendar-display">Mon, Feb 14</div>
+            <div id="clock-display">12:00 PM</div>
+            <div id="medal-container"></div>
+        </header>
+
+        <div class="sprite-container">
+            <div id="main-sprite" onclick="handleSpriteClick(event)"></div>
+            
+            <div id="sprite-action-area">
+                <button id="btn-tuck-in" class="hidden" onclick="tuckIn()">🛌 Tuck In</button>
+                <div id="sick-overlay" class="hidden">
+                    <p>I'm sick... Kiss me 10 times!</p>
+                    <div id="cure-counter">0/10</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-panel">
+            <div class="tab-headers">
+                <button class="tab-btn active" onclick="switchTab('tab-status')">Status</button>
+                <button class="tab-btn" onclick="switchTab('tab-shop')">Shop</button>
+                <button class="tab-btn" onclick="switchTab('tab-settings')">Settings</button>
+            </div>
+
+            <div id="tab-status" class="tab-content active">
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span>Level <span id="level-val">1</span></span>
+                        <div class="progress-bar"><div id="xp-bar" style="width: 0%"></div></div>
+                    </div>
+                    <div class="stat-box">
+                        <span>Coins: <span id="coin-val">0</span></span>
+                        <small id="cps-val">0/sec</small>
+                    </div>
+                </div>
+
+                <div class="love-buttons">
+                    <button class="love-btn" onclick="giveLove('heart')">I Love You 💖</button>
+                    <button class="love-btn" onclick="giveLove('kiss')">Mwaaaa 💋</button>
+                </div>
+
+                <div class="schedule-box">
+                    <h3>📅 Today's Schedule</h3>
+                    <div id="class-list"></div>
+                </div>
+
+                <div class="dishes-box">
+                    <h3>🍽️ Dish Duty</h3>
+                    <p id="dish-text">Checking schedule...</p>
+                </div>
+            </div>
+
+            <div id="tab-shop" class="tab-content">
+                <h3>Upgrade Your Love</h3>
+                <div id="shop-list"></div>
+                <div class="prestige-section">
+                    <button id="btn-prestige" onclick="doPrestige()" disabled>Prestige (Lvl 10 req)</button>
+                </div>
+            </div>
+
+            <div id="tab-settings" class="tab-content">
+                <h3>Settings</h3>
+                <div class="setting-row">
+                    <label>Music Volume</label>
+                    <input type="range" min="0" max="1" step="0.1" value="0.5" oninput="adjustVolume(this.value)">
+                </div>
+                </div>
+        </div>
+    </div>
+
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
